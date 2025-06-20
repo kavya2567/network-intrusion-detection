@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}ML Reports{% endblock %}
+
+{% block content %}
+    <div class="mt-5">
+        <h1>Machine Learning Analysis and Reports</h1>
+        <p class="lead">Here are the results of the network intrusion detection analysis based on the data you provided or generated.</p>
+
+        <h2 class="mt-4">ML Model Summary</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <pre style="white-space: pre-wrap; word-wrap: break-word;">{{ ml_summary }}</pre>
+            </div>
+        </div>
+
+        <h2 class="mt-4">Visual Reports</h2>
+        <div class="card">
+            <div class="card-body">
+                {% if plot_images %}
+                    {% for plot_name, plot_url in plot_images.items() %}
+                        <h5 class="mt-3">{{ plot_name.replace('_', ' ').title() }}</h5>
+                        <img src="data:image/png;base64,{{ plot_url }}" class="img-fluid mb-4" alt="{{ plot_name }}">
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <p>No visual reports generated, possibly due to an error or insufficient data.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <p class="mt-4">
+            **Note:** The complexity of preprocessing and model tuning significantly impacts real-world performance. This example uses simplified steps. For production, consider robust data handling, hyperparameter tuning, and advanced imbalance techniques (like SMOTE).
+        </p>
+        <a href="{{ url_for('input_data') }}" class="btn btn-info mt-3">Upload/Generate New Data</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary mt-3">Back to Dashboard</a>
+    </div>
+{% endblock %}

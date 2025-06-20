@@ -1,0 +1,11 @@
+feature1,feature2,attack_type
+1,10,normal
+2,9,dos
+3,8,normal
+4,7,probe
+5,6,normal
+6,5,r2l
+7,4,normal
+8,3,dos
+9,2,u2r
+10,1,normal

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Input Data{% endblock %}
+
+{% block content %}
+    <div class="mt-5">
+        <h1>Provide Input Data for Analysis</h1>
+        <p class="lead">You can either upload a CSV file containing network traffic data or generate a synthetic dataset for demonstration.</p>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Upload a CSV File</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data" action="{{ url_for('input_data') }}">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Select CSV File:</label>
+                                <input type="file" class="form-control" id="file" name="file" accept=".csv" required>
+                                <div class="form-text">Only .csv files are allowed.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Upload File</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Generate Synthetic Data</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Click the button below to generate a small, dummy dataset for quick testing and demonstration of the ML analysis features. This data is designed to sometimes show class imbalance warnings to help you test the error handling.</p>
+                        <form method="POST" action="{{ url_for('input_data') }}">
+                            <button type="submit" name="generate_data" value="true" class="btn btn-secondary w-100">Generate Data</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-4">
+            After uploading or generating data, proceed to the "ML Reports" page to run the analysis.
+        </p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary mt-3">Back to Dashboard</a>
+    </div>
+{% endblock %}
